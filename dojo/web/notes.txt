@@ -1,0 +1,6 @@
+dojo.require	-	import
+dojo.provide	-	package
+dojo.declare	-	declare a class
+// null means not extending any thing
+   dojo.declare("custom.javaworld.Worker",null,{
+   }

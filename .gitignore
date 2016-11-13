@@ -1,0 +1,8 @@
+.metadata/
+.recommenders/
+RemoteSystemsTempFiles/
+Servers/
+Servers2/
+testjbossws/
+testjbosswsEAR/
+messenger/target/

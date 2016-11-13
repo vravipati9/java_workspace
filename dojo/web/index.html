@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>Hello World</title>
+        <script type="text/JavaScript" src="js/dojo/dojo.js" djConfig="parseOnLoad: true, isDebug: true">
+        </script>
+        <style type="text/css">
+                @import "js/dijit/themes/tundra/tundra.css";
+                @import "js/dojo/resources/dojo.css";
+        </style>
+        <script type="text/JavaScript">
+                dojo.require("dijit.form.Button");
+                // null means not extending any thing
+                dojo.declare("custom.javaworld.Worker",null,{
+                    firstName: "",
+                    lastName: "",
+                    constructor: function(fName, lName){
+                    console.debug("Constructor of com.javaworld.Worker called");
+                    this.firstName = fName;
+                    this.lastName = lName;
+                	},
+                                
+                    work: function(){
+                        console.log("Worker method called in Worker class");
+                        //alert("asdfasdf");
+                    }
+                });
+                
+                dojo.declare("custom.javaworld.ITWorker",custom.javaworld.Worker,{
+                    constructor: function(fName, lName){
+                        console.debug("Constructor of com.javaworld.ITWorker");
+                    },
+                    work: function(){
+                        this.inherited(arguments);
+                        console.log("Writing Code in IT Worker class");
+                    }
+                });
+                var johnDoe = new custom.javaworld.Worker();
+                johnDoe.work();
+                johnDoe.lastName ="Doe";
+                console.log("Last Name " + johnDoe.lastName);
+                var johnDoe1 = new custom.javaworld.Worker("siva", "r");
+                console.log("After constructor initiated values ");
+                console.log("First Name " + johnDoe1.firstName);
+                console.log("Last Name " + johnDoe1.lastName);
+                console.log("-------------------------------");
+               	var itWorker = new  custom.javaworld.ITWorker();
+               	itWorker.work();
+                
+        </script>
+    </head>
+    
+    <body class="tundra">
+
+        <button dojoType="dijit.form.Button" id="helloButton">
+                Hello World
+               <script type="dojo/method" event="onClick">
+                       alert("Hello Dojo.");
+               </script>
+        </button>
+    </body>
+</html>

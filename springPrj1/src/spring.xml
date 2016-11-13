@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+	xmlns:context="http://www.springframework.org/schema/context">
+
+<!-- Setter Bean Injection -->
+<!-- 	<bean id="triangle" class="org.rsr.Triangle" scope="prototype"> -->
+<!-- 		<property name="type" value="Equilateral 3 sides equal"> </property> -->
+<!-- 	</bean> -->
+
+<!-- Constructor Injection -->
+
+<!-- 	<bean id="triangle" class="org.rsr.Triangle"> -->
+<!-- 		<constructor-arg index="0" value="Isosceles 2 sides equal"></constructor-arg> -->
+<!-- 		<constructor-arg index="1" value="20"></constructor-arg>	 -->
+		<!-- spring does automatic conversion for constructor, no need to specify type. If we want particular type we should specify type -->
+		<!-- type is used to specify data type -->
+		<!-- index is used to specify order -->
+<!-- 	</bean> -->
+
+<!-- 
+	<bean id="triangle" class="org.rsr.Triangle">
+		<property name="pointA" ref="zeroPoint"></property>	
+		<property name="pointB" ref="point2"></property>
+		<property name="pointC" ref="point3"></property>
+	</bean>	
+	
+	<bean id="zeroPoint" class="org.rsr.Point">
+		<property name="x" value="0"></property>	
+		<property name="y" value="0"></property>
+	</bean>	
+	
+	<bean id="point2" class="org.rsr.Point">
+		<property name="x" value="-20"></property>	
+		<property name="y" value="0"></property>
+	</bean>	
+	
+	<bean id="point3" class="org.rsr.Point">
+		<property name="x" value="20"></property>	
+		<property name="y" value="0"></property>
+	</bean>	
+ -->
+ 
+ <!-- 
+	Inner beans -	used to create beans at the time of outer bean creation
+	<bean id="triangle" class="org.rsr.Triangle">
+		<property name="pointA" ref="zeroPoint"></property>	
+		<property name="pointB">
+			<bean class="org.rsr.Point">
+				<property name="x" value="20"></property>	
+				<property name="y" value="0"></property>
+			</bean>
+		</property>
+	</bean>	
+ -->
+
+
+<!-- 	<bean id="triangle" class="org.rsr.Triangle">
+		<property name="pointsList">
+			<list>
+				<ref bean="zeroPoint"/>
+				<ref bean="point2"/>
+				<ref bean="point3"/>
+			</list>			
+		</property>	
+	</bean>
+	
+	<bean id="zeroPoint" class="org.rsr.Point">
+		<property name="x" value="0"></property>	
+		<property name="y" value="0"></property>
+	</bean>	
+	
+	<bean id="point2" class="org.rsr.Point">
+		<property name="x" value="-20"></property>	
+		<property name="y" value="0"></property>
+	</bean>	
+	
+	<bean id="point3" class="org.rsr.Point">
+		<property name="x" value="20"></property>	
+		<property name="y" value="0"></property>
+	</bean>	
+
+  --> 
+
+<!-- autowire -->  	
+<!-- 	 
+		autowire feature enables us to automatically inject beans
+		byName - means, if the name of a bean is same as the name of other bean property, auto wire it.   
+		Ex: a “customer” bean exposes an “address” property, Spring will find the “address” bean in current container and wire it automatically.
+			And if no matching found, just do nothing
+		<bean id="customer" class="com.mkyong.common.Customer" autowire="byName" />
+ 
+		<bean id="address" class="com.mkyong.common.Address" >
+			<property name="fulladdress" value="Block A 888, CA" />
+		</bean>
+
+		byType - checks for matching of Point type in current Container for Triangle class and autowire it.
+				 If Triangle class in xml is defined as 'autowire by Type' 
+				 The limitation is it has to be one bean only in java file
+				 
+		constructor - same as byType, but it uses constructor injection
+-->
+
+<!-- Life Cycle methods -->
+<!-- 
+		init-method -  is called by spring after initializing bean
+		destroy-method- after exection it is called
+		instead of this we can use implement InitializingBean, DisposableBean. But if we implement the model classes depends on spring framework
+		
+		Instead of defining these life cycle method for every bean we can define this for all beans. To do this we have to define for outer bean tag.
+		If we define both like interfaces and xml configuration, the order is it executes first interface methods then user defined methods.
+		<bean id="triangle" class="org.rsr.Triangle" autowire="byName" init-method="myInt" destroy-method="cleanUp">  			
+ -->
+ 
+<!-- application context aware -->
+<!-- Applicaton context aware is used like instead of binding bean in xml we bind manually in java code. Ofcourse, it is not recommended becoz of
+	it is tightly coupled by specifying spring configuratoin in java file.
+	To do this,  we have to implement ApplicationContextAware, BeanNameAware in bean class -->		
+
+<!-- Bean Definition Inheritance -->
+<!-- 
+ -->
+ 
+<!-- BeanPostProcessor -->
+<!-- This method runs for every initialistion of beans. It is a seperate class which executes for all beans 
+	 for this we need to use AbstractApplicationContext
+	<bean class="org.rsr.DisplayBeanPostProcessor"></bean>
+-->
+<!-- BeanFactoryPostProcessor -->
+<!-- BeanFactoryPostProcessor is executed first and then all beans are initialized -->
+<!-- for this we just need to use ApplicationContext. -->
+<!-- <bean class="org.rsr.MyBeanFactoryPostProcessor"></bean> --> 
+ 
+<!-- @Required -->
+<!-- Which allows us to specify which beans are required 
+	 If we didn't reference pointA, in triangle bean we get NullPointerException, to overcome this we have to define pointA as Required and 
+	 define this bean in xml. If we do this we get BeanInitializationException. This way we can trace errors easily
+	 <bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor"></bean>
+ -->
+ 
+<!-- @Autowired -->
+<!-- It autowires beans specified in model for particular obj
+	 to be injeccted. If it is only one type(Point) in xml file, it injects automatically. If multiple
+	 types found then it checks for names(pointA, center, pointB).
+	 By default it autowires by type.
+	 class Triangle {
+	 	@Autowired
+	 	void setCenter(Point p) {this.point = p; }
+	 }
+	 For autowired annotation we need to add below line in xml
+	 <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"></bean> 
+-->
+
+<!-- 
+We can use @Resource annotation also behaves like @Autowired. This is JSR 250 annotation.
+javax.annotation.Resource - @Resource - it checks for same member variable name defined in xml by default 
+@PostConstruct	- similar to init
+@PreDestroy		- similar to destroy
+-->
+<!--
+Instead of specifying each bean PostProcecssor like AutowiredAnnotationBeanPostProcessor, 
+RequiredAnnotationBeanPostProcessor 
+we can define in single tag.
+	<context:annotation-config/>
+-->
+
+
+<!-- Component and Stereotype annotations -->
+<!-- 
+@Component
+If we define any bean class with this annotation, no need to define bean in xml. Spring container
+scan for all classes for beans to inject.
+@Service
+@Repository
+@Controller
+If we specify bean with these annotations no need to define in beans xml file. Spring container 
+looks code to mark with these annotations.
+For this we have to add <context:component-scan base-package="org.rsr"></context:component-scan>
+package name is used to specify for which package it need to check for spring container
+ -->
+	<context:annotation-config/>
+	<context:component-scan base-package="org.rsr"></context:component-scan>
+	<bean id="triangle" class="org.rsr.Triangle">
+		
+	</bean>
+	
+	<bean id="pointA" class="org.rsr.Point">
+		<property name="x" value="${pointA.pointX}"></property>	
+		<property name="y" value="${pointA.pointY}"></property>
+	</bean>	
+	
+	<bean id="pointB" class="org.rsr.Point">
+		<property name="x" value="-20"></property>	
+		<property name="y" value="0"></property>
+	</bean>	
+	
+	<bean id="pointC" class="org.rsr.Point">
+		<property name="x" value="20"></property>	
+		<property name="y" value="0"></property>
+	</bean>	
+
+<!--  This is used to read values from properties file -->
+<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+	<property name="locations" value="pointsconfig.properties"></property>
+</bean>
+
+<!-- Bean Scopes -->
+<!-- 
+		 * Once create an application context, spring container initializes all beans specified in xml file.
+		 * There are ways we can configure this.
+		 * Default bean scope - is SingleTon - only once per Spring container(Spring container initializes all beans).
+		 * Prototype - New beans created for every request or reference.(beans get initialized when we call bean or refer bean)
+		 * Web-aware Context Bean - 
+		 * Request - New bean per Servlet created for every request
+		 * Session - New bean per session
+		 * Global Session
+		 * We can define scope by using scope attribute in bean declaration in xml file.
+ -->
+ 
+ <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">	
+ 	<property name="basenames">
+ 		<list>
+ 			<value>mymessages</value>
+ 		</list>
+ 	</property>
+ </bean>
+			
+<alias name="triangle" alias="triangle-alias"/>
+
+
+</beans>

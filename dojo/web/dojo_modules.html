@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>Hello World</title>
+        <script type="text/JavaScript" src="js/dojo/dojo.js" djConfig="parseOnLoad: true, isDebug: true">
+        </script>
+        <style type="text/css">
+                @import "js/dijit/themes/tundra/tundra.css";
+                @import "js/dojo/resources/dojo.css";
+        </style>
+        <script type="text/JavaScript">
+                dojo.require("dijit.form.Button");
+                dojo.require("custom.javaworld.Worker");
+                dojo.require("custom.javaworld.ITWorker");
+            
+                var johnDoe1 = new custom.javaworld.Worker("siva", "r");
+                console.log("After code has been moved to Modules");
+                console.log("First Name " + johnDoe1.firstName);
+                console.log("Last Name " + johnDoe1.lastName);
+                console.log("--------------------------------");
+                var johnDoe1 = new custom.javaworld.ITWorker("ravipati", "r");
+                
+                
+               	
+                
+        </script>
+    </head>
+    
+    <body class="tundra">
+
+        <button dojoType="dijit.form.Button" id="helloButton">
+                Hello World
+               <script type="dojo/method" event="onClick">
+                       alert("Hello Dojo.");
+               </script>
+        </button>
+    </body>
+</html>

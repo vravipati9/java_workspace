@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="org.siva.ravipati.PlattsSheet" table="platts_sheet">
+
+		<id name="plattsSheetId" type="integer" column="PLATTS_SHEET_ID"
+			unsaved-value="0">
+			<generator class="assigned" />
+		</id>
+
+		<property name="plattsSheetName">
+			<column name="PLATTS_SHEET_NAME" />
+		</property>
+
+
+		<property name="statusTypeId">
+			<column name="STATUS_TYPE_ID" />
+		</property>
+
+		<property name="effectiveDate">
+			<column name="EFFECTIVE_DATE" />
+			
+		</property>
+
+		<set name="plattsPrices" lazy="true" cascade="all,delete-orphan">
+			<key column="PLATTS_SHEET_ID" />
+			<one-to-many class="org.siva.ravipati.PlattsPrice" />
+		</set>
+
+	</class>
+
+	<sql-query name="selPlattSheetItems">
+		<return alias="plattsSheet" class="org.siva.ravipati.PlattsSheet" />
+		<![CDATA[CALL GetPlattSheets(:plattsSheetId)]]>
+	</sql-query>
+
+
+
+</hibernate-mapping>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+	xmlns:context="http://www.springframework.org/schema/context">
+
+	<context:annotation-config />
+	<context:component-scan base-package="org.rsr"></context:component-scan>
+
+	<!-- By using normal connection -->
+	<bean id="datasource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> 
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" /> 
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl" /> 
+		<property name="username" value="scott" /> 
+		<property name="password" value="tiger"/> 
+	</bean>
+
+	<!-- <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="org.apache.derby.jdbc.ClientDriver" />
+		<property name="url" value="jdbc:derby://localhost:1527/db;create=true" />
+									
+		<property name="initialSize" value="2" />
+		<property name="maxActive" value="5" />
+	</bean> -->
+	
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="datasource"></property>
+	</bean>
+	
+	<bean id="simpleJdbcDAOImpl" class="org.rsr.jdbc.SimpleJdbcDAOImpl">
+		<property name="dataSource" ref="datasource"></property>
+	</bean>
+	
+</beans>

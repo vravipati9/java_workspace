@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:jxb="http://java.sun.com/xml/ns/jaxb" jxb:version="2.0">
+	<xsd:simpleType name="IXLType">
+		<xsd:restriction base="xsd:string">
+<!-- 			<xsd:annotation>
+			<xsd:appinfo>
+      	  		<jxb:typesafeEnumMember name="eStwA"/>
+      		</xsd:appinfo>
+      		</xsd:annotation>
+       -->
+			<xsd:enumeration value="eStwS" />
+			<xsd:enumeration value="SpDrL" />
+			<xsd:enumeration value="SpDrS" />
+			<xsd:enumeration value="VGS80" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+
+<!-- <xs:element name="car" type="carType"/>
+
+<xs:simpleType name="carType">
+  <xs:restriction base="xs:string">
+    <xs:enumeration value="Audi"/>
+    <xs:enumeration value="Golf"/>
+    <xs:enumeration value="BMW"/>
+  </xs:restriction>
+</xs:simpleType>
+
+ -->
+</xsd:schema>            

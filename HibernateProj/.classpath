@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.6.0_45/src.zip"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk6"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/hibernate4"/>
+	<classpathentry kind="lib" path="D:/softwares/lib/log4j.jar"/>
+	<classpathentry kind="lib" path="D:/softwares/lib/ojdbc14.jar"/>
+	<classpathentry kind="lib" path="D:/softwares/lib/com.mysql.jdbc_5.1.5.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

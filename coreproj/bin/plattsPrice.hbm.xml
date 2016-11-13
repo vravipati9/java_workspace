@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="org.siva.ravipati.PlattsPrice" table="platts_price"
+		dynamic-insert="true" where="">
+		<id name="plattsPriceId" type="integer" column="PLATTS_PRICE_ID">
+			<generator class="increment" />
+		</id>
+		<property name="regionTypeId">
+			<column name="REGION_TYPE_ID" />
+		</property>
+		<property name="priceHigh">
+			<column name="PRICE_HIGH" />
+		</property>
+		<property name="priceLow">
+			<column name="PRICE_LOW" />
+		</property>
+
+		<many-to-one class="org.siva.ravipati.PlattsSheet" name="plattsSheet"
+			not-null="true">
+			<column name="PLATTS_SHEET_ID" />
+		</many-to-one>
+	</class>
+
+</hibernate-mapping>

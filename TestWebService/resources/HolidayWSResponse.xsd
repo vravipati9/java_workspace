@@ -1,0 +1,23 @@
+
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" 
+xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+xmlns:urn="schemas-microsoft-com:xml-diffgram-v1">
+  <xs:element name="NewDataSet">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Holidays" maxOccurs="unbounded" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="Name"/>
+              <xs:element type="xs:string" name="Key"/>
+              <xs:element type="xs:dateTime" name="Date"/>
+            </xs:sequence>
+            <xs:attribute ref="urn:id" xmlns:urn="urn:schemas-microsoft-com:xml-diffgram-v1"/>
+            <xs:attribute ref="urn:rowOrder" xmlns:urn="urn:schemas-microsoft-com:xml-msdata"/>
+            <xs:attribute ref="urn:hasChanges" xmlns:urn="urn:schemas-microsoft-com:xml-diffgram-v1"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
