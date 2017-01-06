@@ -46,3 +46,7 @@ ex: ``git remote set-url origin https://github.com/vvsrk/rest_workspace.git``
 
 ### determine the URL that a local Git repository was originally cloned from? ###
 * `` git config --get remote.origin.url``
+
+## If git command screen is asking for User Id and Pwd every time, we can avoid this by executing these properties from cmd scr##
+* ``config --global user.email "githubuserId@gmail.com" ``
+* ``config --global user.name "githubuserId" ``
